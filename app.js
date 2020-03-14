@@ -18,7 +18,7 @@ bot.onText(/\/start/, (msg) => {
 bot.on('text', (msg) => {
   const chatId = msg.chat.id;
   // 排除 /start 的情况
-  if(msg.text !== '/start'){ return }
+  if(msg.text === '/start'){ return }
   bot.sendMessage(chatId, 'Received your text');
 });
 
