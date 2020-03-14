@@ -11,15 +11,14 @@ const bot = new TelegramBot(token, {polling: true});
 // /start
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
-
-
-  // send back the matched "whatever" to the chat
   bot.sendMessage(chatId, 'hello, just send your file, which will upload to https://file.ifthat.com');
 });
 
+// 收到任何文字消息时候，给出反馈
 bot.on('text', (msg) => {
   const chatId = msg.chat.id;
-  // send a message to the chat acknowledging receipt of their message
+  // 排除 /start 的情况
+  if(msg.text !== '/start'){ return }
   bot.sendMessage(chatId, 'Received your text');
 });
 
@@ -27,7 +26,7 @@ bot.on('text', (msg) => {
 bot.on('document', (msg) => {
   const chatId = msg.chat.id;
   let filename = generateUUID() + '-' + msg.document.file_name.replace(/ /g, '-');
-  bot.sendMessage(chatId, `${msg.document.file_name} is uploading`);
+  bot.sendMessage(chatId, `${msg.document.file_name} is uploading...`);
   let file_id = msg.document.file_id;
   var options = {
     uri: `https://api.telegram.org/bot${token}/getFile?file_id=${file_id}`,
