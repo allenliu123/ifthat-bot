@@ -24,6 +24,25 @@ bot.on('text', (msg) => {
 
 // 通过 TG 上传文件到 ifthat
 bot.on('document', (msg) => {
+  upload(msg);
+})
+
+// 通过 TG 上传图片到 ifthat
+bot.on('photo', (msg) => {
+  upload(msg);
+})
+
+var generateUUID = function() {
+	var s = [];
+	var hexDigits = "0123456789abcdef";
+	for (var i = 0; i < 16; i++) {
+		s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+	}
+	var uuid = s.join("");
+	return uuid;
+}
+
+var upload = function(msg) {
   const chatId = msg.chat.id;
   let filename = generateUUID() + '-' + msg.document.file_name.replace(/ /g, '-');
   bot.sendMessage(chatId, `${msg.document.file_name} is uploading...`);
@@ -47,14 +66,4 @@ bot.on('document', (msg) => {
     .catch(function (err) {
       bot.sendMessage(chatId, `${filename} upload error`);
     });
-})
-
-var generateUUID = function() {
-	var s = [];
-	var hexDigits = "0123456789abcdef";
-	for (var i = 0; i < 16; i++) {
-		s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
-	}
-	var uuid = s.join("");
-	return uuid;
 }
