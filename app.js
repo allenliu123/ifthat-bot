@@ -11,15 +11,37 @@ const bot = new TelegramBot(token, {polling: true});
 // /start
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, 'hello, just send your file, which will upload to https://file.ifthat.com');
+  bot.sendMessage(chatId, 'hello, I\'m used for file.ifthat.com \nsend your file, which will upload\necho your text, which will saved \n/show, show your text');
 });
+
+// /show
+bot.onText(/\/show/, (msg) => {
+  const chatId = msg.chat.id;
+  rp({
+    uri: 'https://file.ifthat.com/getText',
+    json: true
+  }).then(res => {
+    bot.sendMessage(chatId, res.content);
+  })
+})
 
 // 收到任何文字消息时候，给出反馈
 bot.on('text', (msg) => {
   const chatId = msg.chat.id;
-  // 排除 /start 的情况
-  if(msg.text === '/start'){ return }
-  bot.sendMessage(chatId, 'Received your text');
+  // 排除 /start /show的情况
+  if(msg.text === '/start' || msg.text === '/show'){ return }
+  rp({
+    method: 'post',
+    uri: 'https://file.ifthat.com/postText',
+    form: {
+      textarea: msg.text
+    },
+    json: true
+  }).then(() => {
+    bot.sendMessage(chatId, 'saved your text');
+  }).catch(() => {
+    bot.sendMessage(chatId, 'save error');
+  })
 });
 
 // 上传图片
