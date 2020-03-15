@@ -9,13 +9,13 @@ Telegram 真是开发者的乐土，加密传输，永久免费，丰富的 Api�
 
 ## 上传文件
 只需要发送你的文件到@ifthat_bot，就可以保存到 https://file.ifthat.com ，目前可发送文件类型为，图片，文件，音频，视频  
-![image](https://static.ifthat.com/public/data/27c454e24ccc535a-image.png)
-![image](https://static.ifthat.com/public/data/ac019a4132e771ff-image.png)
+![image](https://static.ifthat.com/public/data/39c72a828dffe9ae-image.jpg)  
+![image](https://static.ifthat.com/public/data/ac019a4132e771ff-image.png)  
 
 ## 上传文本
 发送文字，就可以保存，可到 https://file.ifthat.com 查看  
-![image](https://static.ifthat.com/public/data/646d55190f118d99-image.png)
-![image](https://static.ifthat.com/public/data/fcb0d749feb57447-image.png)
+![image](https://static.ifthat.com/public/data/646d55190f118d99-image.png)  
+![image](https://static.ifthat.com/public/data/fcb0d749feb57447-image.png)  
 
 ## 显示文本
 /show 指令可以显示文本
