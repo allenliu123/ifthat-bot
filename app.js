@@ -22,31 +22,71 @@ bot.on('text', (msg) => {
   bot.sendMessage(chatId, 'Received your text');
 });
 
-// 通过 TG 上传文件到 ifthat
-bot.on('document', (msg) => {
-  upload(msg);
+// 上传图片
+bot.on('photo', (msg) => {
+  upload(msg, 'photo');
 })
 
-// 通过 TG 上传图片到 ifthat
-bot.on('photo', (msg) => {
-  upload(msg);
+// 上传文件
+bot.on('document', (msg) => {
+  upload(msg, 'document');
 })
+
+// 上传音频
+bot.on('audio', (msg) => {
+  upload(msg, 'audio');
+})
+
+// 上传视频
+bot.on('video', (msg) => {
+  upload(msg, 'video');
+})
+
+// debug
+// bot.on('message', (msg) => {
+//   const chatId = msg.chat.id;
+//   console.log(msg);
+//   // send a message to the chat acknowledging receipt of their message
+//   bot.sendMessage(chatId, 'Received your message');
+// });
+
+bot.on("polling_error", (err) => console.log(err));
 
 var generateUUID = function() {
 	var s = [];
-	var hexDigits = "0123456789abcdef";
-	for (var i = 0; i < 16; i++) {
+  var hexDigits = "0123456789abcdef";
+  s[0] = 't';
+  s[1] = 'g';
+	for (var i = 2; i < 16; i++) {
 		s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
 	}
 	var uuid = s.join("");
 	return uuid;
 }
 
-var upload = function(msg) {
+var upload = function(msg, type) {
   const chatId = msg.chat.id;
-  let filename = generateUUID() + '-' + msg.document.file_name.replace(/ /g, '-');
-  bot.sendMessage(chatId, `${msg.document.file_name} is uploading...`);
-  let file_id = msg.document.file_id;
+  let filename;
+  let file_id;
+  if(type === 'photo') {
+    filename = generateUUID() + '-image.jpg';
+    bot.sendMessage(chatId, `photo is uploading...`);
+    file_id = msg.photo[2].file_id;
+  } else if(type === 'document') {
+    filename = generateUUID() + '-' + msg.document.file_name.replace(/ /g, '-');
+    bot.sendMessage(chatId, `file is uploading...`);
+    file_id = msg.document.file_id;
+  } else if(type === 'audio') {
+    filename = generateUUID() + '-' + msg.audio.title.replace(/ /g, '-');
+    bot.sendMessage(chatId, `audio is uploading...`);
+    file_id = msg.audio.file_id;
+  } else if(type === 'video') {
+    filename = generateUUID() + '.mp4';
+    bot.sendMessage(chatId, `video is uploading...`);
+    file_id = msg.video.file_id;
+  } else {
+    return;
+  }
   var options = {
     uri: `https://api.telegram.org/bot${token}/getFile?file_id=${file_id}`,
     headers: {
