@@ -42,7 +42,7 @@ bot.on('video', (msg) => {
   upload(msg, 'video');
 })
 
-// debug
+// // debug
 // bot.on('message', (msg) => {
 //   const chatId = msg.chat.id;
 //   console.log(msg);
@@ -71,7 +71,7 @@ var upload = function(msg, type) {
   if(type === 'photo') {
     filename = generateUUID() + '-image.jpg';
     bot.sendMessage(chatId, `photo is uploading...`);
-    file_id = msg.photo[2].file_id;
+    file_id = msg.photo[2]? msg.photo[2].file_id: msg.photo[1]? msg.photo[1].file_id: msg.photo[0].file_id;
   } else if(type === 'document') {
     filename = generateUUID() + '-' + msg.document.file_name.replace(/ /g, '-');
     bot.sendMessage(chatId, `file is uploading...`);
