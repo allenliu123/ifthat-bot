@@ -1,9 +1,13 @@
 process.env.NTBA_FIX_319 = 1;
+var http = require('http');
 const TelegramBot = require('node-telegram-bot-api');
 const request = require('request');
 const fs = require('fs');
 var rp = require('request-promise');
 
+http.createServer(function (req, res) {
+  res.send("I am running");
+}).listen(process.env.PORT || 5000);
 
 const token = process.env.token || require('./config').token;
 console.log(token);
