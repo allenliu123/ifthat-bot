@@ -4,7 +4,9 @@ const request = require('request');
 const fs = require('fs');
 var rp = require('request-promise');
 
-const token = require('./config').token;
+
+const token = process.env.token || require('./config').token;
+console.log(token);
 
 const bot = new TelegramBot(token, {polling: true});
 
