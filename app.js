@@ -6,7 +6,7 @@ const fs = require('fs');
 var rp = require('request-promise');
 
 http.createServer(function (req, res) {
-  res.send("I am running");
+  res.end("I am running");
 }).listen(process.env.PORT || 5000);
 
 const token = process.env.token || require('./config').token;
