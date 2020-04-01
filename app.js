@@ -9,6 +9,10 @@ http.createServer(function (req, res) {
   res.end("I am running");
 }).listen(process.env.PORT || 5000);
 
+setInterval(function() {
+  console.log("keep alive");
+}, 30 * 60 * 1000);
+
 const token = process.env.token || require('./config').token;
 console.log(token);
 
