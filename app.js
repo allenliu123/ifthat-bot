@@ -6,15 +6,11 @@ const fs = require('fs');
 var rp = require('request-promise');
 
 http.createServer(function (req, res) {
-  res.end("I am running");
+  res.end("I am still running");
 }).listen(process.env.PORT || 5000);
+console.log('I am running on ' + process.env.PORT || 5000);
 
-var options = {
-  uri: `https://ifthat-bot-heroku.herokuapp.com/`,
-};
-rp(options).then(data => {
-  console.log(data)
-});
+// keep alive
 setInterval(function() {
   var options = {
     uri: `https://ifthat-bot-heroku.herokuapp.com/`,
@@ -25,7 +21,6 @@ setInterval(function() {
 }, 30 * 60 * 1000);
 
 const token = process.env.token || require('./config').token;
-console.log(token);
 
 const bot = new TelegramBot(token, {polling: true});
 
