@@ -9,8 +9,19 @@ http.createServer(function (req, res) {
   res.end("I am running");
 }).listen(process.env.PORT || 5000);
 
+var options = {
+  uri: `https://ifthat-bot-heroku.herokuapp.com/`,
+};
+rp(options).then(data => {
+  console.log(data)
+});
 setInterval(function() {
-  console.log("keep alive");
+  var options = {
+    uri: `https://ifthat-bot-heroku.herokuapp.com/`,
+  };
+  rp(options).then(data => {
+    console.log(data)
+  });
 }, 30 * 60 * 1000);
 
 const token = process.env.token || require('./config').token;
