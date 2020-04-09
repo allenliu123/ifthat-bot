@@ -11,14 +11,14 @@ http.createServer(function (req, res) {
 console.log('I am running on ' + process.env.PORT || 5000);
 
 // keep alive
-setInterval(function() {
-  var options = {
-    uri: `https://ifthat-bot-heroku.herokuapp.com/`,
-  };
-  rp(options).then(data => {
-    console.log(data)
-  });
-}, 30 * 60 * 1000);
+// setInterval(function() {
+//   var options = {
+//     uri: `https://ifthat-bot-heroku.herokuapp.com/`,
+//   };
+//   rp(options).then(data => {
+//     console.log(data)
+//   });
+// }, 30 * 60 * 1000);
 
 const token = process.env.token || require('./config').token;
 
