@@ -1,4 +1,5 @@
 process.env.NTBA_FIX_319 = 1;
+require('dotenv').config()
 var http = require('http');
 const TelegramBot = require('node-telegram-bot-api');
 const request = require('request');
@@ -7,8 +8,8 @@ var rp = require('request-promise');
 
 http.createServer(function (req, res) {
   res.end("I am still running");
-}).listen(process.env.PORT || 5000);
-console.log('I am running on ' + process.env.PORT || 5000);
+}).listen(process.env.PORT || 8083);
+console.log('I am running on ' + process.env.PORT || 8083);
 
 // keep alive
 // setInterval(function() {
@@ -20,7 +21,7 @@ console.log('I am running on ' + process.env.PORT || 5000);
 //   });
 // }, 30 * 60 * 1000);
 
-const token = process.env.token || require('./config').token;
+const token = process.env.TOKEN || require('./config').token;
 
 const bot = new TelegramBot(token, {polling: true});
 

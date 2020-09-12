@@ -13,7 +13,7 @@ Telegram 真是开发者的乐土，加密传输，永久免费，丰富的 Api�
 git clone https://github.com/allenliu123/ifthat-bot.git
 cd ifthat-bot
 npm install
-export token=[YOUR_BOT_TOKEN]
+export TOKEN=[YOUR_BOT_TOKEN]
 npm run start
 ```
 

@@ -10,6 +10,7 @@
   "author": "allen",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "node-telegram-bot-api": "^0.40.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.5"
